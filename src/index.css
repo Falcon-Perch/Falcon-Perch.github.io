@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+:root {
+  --c-bg: #e6ecf0;        /* pale sky */
+  --c-surface: #f8fafb;
+  --c-ink: #17222b;       /* falcon cap */
+  --c-muted: #4a5d6b;     /* slate plumage */
+  --c-line: #c7d2da;
+  --c-cere: #f2b807;      /* eye-ring yellow — the only accent */
+  --c-danger: #b3261e;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --c-bg: #10181e;
+    --c-surface: #18242c;
+    --c-ink: #e4eaee;
+    --c-muted: #93a6b4;
+    --c-line: #2c3b46;
+    --c-danger: #f2867e;
+    color-scheme: dark;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--c-bg);
+  --color-surface: var(--c-surface);
+  --color-ink: var(--c-ink);
+  --color-muted: var(--c-muted);
+  --color-line: var(--c-line);
+  --color-cere: var(--c-cere);
+  --color-danger: var(--c-danger);
+  --color-falcon: #17222b;
+  --font-display: "Familjen Grotesk", "Arial Narrow", system-ui, sans-serif;
+  --font-body: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--c-bg);
+  color: var(--c-ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.5;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tabular { font-variant-numeric: tabular-nums; }
+
+@layer base {
+  :focus-visible {
+    outline: 3px solid var(--c-cere);
+    outline-offset: 2px;
+  }
+  input[type="search"]::-webkit-search-cancel-button { appearance: none; }
+}
+
+/* ---------- Map ---------- */
+.leaflet-container {
+  background: var(--c-bg);
+  font-family: var(--font-body);
+}
+@media (prefers-color-scheme: dark) {
+  .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) brightness(0.85) contrast(0.9); }
+}
+.leaflet-control-attribution {
+  font-size: 11px;
+  background: color-mix(in srgb, var(--c-surface) 85%, transparent) !important;
+  color: var(--c-muted);
+}
+.leaflet-control-attribution a { color: var(--c-ink); }
+
+.fp-marker { background: none; border: none; }
+
+/* The perch: a falcon's eye. */
+.fp-eye {
+  position: relative;
+  display: block;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #17222b;
+  border: 7px solid var(--c-cere);
+  box-shadow: 0 0 0 2px #17222b, 0 4px 10px rgb(23 34 43 / 0.35);
+  box-sizing: border-box;
+}
+.fp-eye::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #e6ecf0;
+}
+.fp-eye.is-draft {
+  background: transparent;
+  border-style: dashed;
+  border-color: #17222b;
+  box-shadow: none;
+}
+.fp-eye.is-draft::after { display: none; }
+
+.fp-real {
+  display: block;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #4a5d6b;
+  border: 3px solid #f8fafb;
+  box-shadow: 0 0 0 1px #4a5d6b;
+  box-sizing: border-box;
+}
+
+/* ---------- Motion that answers an action ---------- */
+@keyframes sheet-in {
+  from { transform: translateY(16px); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+.sheet-enter { animation: sheet-in 220ms cubic-bezier(.2,.8,.2,1); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

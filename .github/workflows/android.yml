@@ -45,7 +45,7 @@ jobs:
           distribution: temurin
           java-version: 21
           cache: gradle
-      - uses: android-actions/setup-android@v3
+      # ubuntu-latest ships the Android SDK (ANDROID_HOME); Gradle fetches any missing platform.
 
       # Keeps the debug signing key stable between runs when no release key is configured.
       - uses: actions/cache@v4

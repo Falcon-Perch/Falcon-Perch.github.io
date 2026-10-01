@@ -4,9 +4,9 @@ import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
-// GitHub Pages project sites live under /<repo-name>/.
-// Change this if you rename the repository or use a custom domain (then use '/').
-const PAGES_BASE = '/falcon-perch/';
+// The landing page (site/) is served at the root of falcon-perch.github.io and the web app
+// under /app/. Change this if you host the app somewhere else.
+const PAGES_BASE = '/app/';
 
 // GitHub Pages can't send HTTP headers, so the Content Security Policy is a <meta> tag.
 // It is only added to production builds because Vite's dev server needs inline scripts.

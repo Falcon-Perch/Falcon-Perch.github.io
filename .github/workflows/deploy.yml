@@ -26,10 +26,17 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run build
+      # Landing page at the site root, web app under /app/.
+      - name: Assemble site
+        run: |
+          rm -rf _site
+          mkdir _site
+          cp -r site/. _site/
+          cp -r dist _site/app
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: _site
 
   deploy:
     needs: build

@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'self'; form-action 'none'"
+    />
+    <title>Falcon Perch: hide your real location on Android</title>
+    <meta
+      name="description"
+      content="Falcon Perch replaces your Android phone's location for every app, Google Maps included, with a place you choose. Free, open source, no account, no root."
+    />
+    <meta name="theme-color" content="#17222B" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Falcon Perch: hide your real location on Android" />
+    <meta property="og:description" content="Choose where your phone says you are. Every app follows, Google Maps included. Free and open source." />
+    <meta property="og:image" content="https://falcon-perch.github.io/icons/icon-512.png" />
+    <meta name="twitter:card" content="summary" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+    <link rel="preload" href="fonts/familjen-grotesk-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="nav" id="top">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top" aria-label="Falcon Perch home">
+          <img src="favicon.svg" alt="" width="32" height="32" />
+          <span>Falcon Perch</span>
+        </a>
+        <nav class="nav-links" aria-label="Sections">
+          <a href="#walkthrough">Walkthrough</a>
+          <a href="#how">How it works</a>
+          <a href="#setup">Setup</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+        <a class="btn btn-primary btn-sm" href="https://github.com/Falcon-Perch/Falcon-Perch.github.io/releases/download/android-latest/falcon-perch.apk" data-download>
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14" /></svg>
+          Download
+        </a>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- ============ HERO ============ -->
+      <section class="hero">
+        <div class="wrap hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow"><span class="dot" aria-hidden="true"></span> Free &amp; open source · Android</p>
+            <h1>Be anywhere.<br /><span class="accent">Stay private.</span></h1>
+            <p class="lede">
+              Falcon Perch replaces your phone’s location for <strong>every app</strong>, Google Maps included, with a place you
+              choose. Your real whereabouts stay with you.
+            </p>
+            <div class="cta-row">
+              <a class="btn btn-primary btn-lg" href="https://github.com/Falcon-Perch/Falcon-Perch.github.io/releases/download/android-latest/falcon-perch.apk" data-download>
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14" /></svg>
+                Download for Android
+              </a>
+              <a class="btn btn-ghost btn-lg" href="#walkthrough">
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+                See how it works
+              </a>
+            </div>
+            <ul class="meta" aria-label="Download details">
+              <li>Android 6.0+</li>
+              <li>About 5&nbsp;MB</li>
+              <li>No root</li>
+              <li>No account</li>
+            </ul>
+          </div>
+
+          <div class="hero-visual" aria-hidden="true">
+            <div class="orbit"></div>
+            <div class="phone phone-hero">
+              <div class="screen">
+                <svg class="map" viewBox="0 0 300 620" preserveAspectRatio="xMidYMid slice"><use href="#map" /></svg>
+                <div class="hero-pin"><span class="eye"></span></div>
+                <div class="hero-card">
+                  <span class="chip"><svg viewBox="0 0 24 24"><path d="M12 3 5 6v6c0 4.5 3 7.7 7 9 4-1.3 7-4.5 7-9V6z" /></svg> All apps see this perch</span>
+                  <b>48.8584° N</b>
+                  <b>2.2945° E</b>
+                  <small>Eiffel Tower, Paris</small>
+                </div>
+              </div>
+            </div>
+            <div class="float float-a"><svg viewBox="0 0 24 24"><path d="M12 3 5 6v6c0 4.5 3 7.7 7 9 4-1.3 7-4.5 7-9V6z" /></svg> Real location hidden</div>
+            <div class="float float-b"><svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="3" /><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z" /></svg> Maps · weather · social</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ TRUST STRIP ============ -->
+      <section class="strip" aria-label="Highlights">
+        <div class="wrap strip-grid">
+          <div><b>Every app</b><span>Overrides Android and Google Play services location</span></div>
+          <div><b>One switch</b><span>On and off from the app or the notification</span></div>
+          <div><b>Nothing collected</b><span>No account, no analytics, no servers</span></div>
+          <div><b>Open source</b><span>MIT licensed. Read every line on GitHub</span></div>
+        </div>
+      </section>
+
+      <!-- ============ WALKTHROUGH ============ -->
+      <section class="section" id="walkthrough" aria-labelledby="wt-title">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="kicker">Walkthrough</p>
+            <h2 id="wt-title">Four taps from real to private</h2>
+            <p class="sub">Pick a place, set it as your perch, flip one switch. Every app on your phone now sees the perch.</p>
+          </div>
+
+          <div class="wt">
+            <div class="wt-stage">
+              <div class="phone phone-demo" id="demo" data-stage="A" aria-label="Animated walkthrough of Falcon Perch" role="img">
+                <div class="screen" id="demo-screen">
+                  <div class="statusbar">
+                    <span>9:41</span>
+                    <span class="sb-icons">
+                      <svg class="sb-loc" viewBox="0 0 24 24"><path d="M12 2 4.5 20.3l.7.7L12 18l6.8 3 .7-.7z" /></svg>
+                      <svg viewBox="0 0 24 24"><path d="M2 20h3v-4H2zm5 0h3v-8H7zm5 0h3V8h-3zm5 0h3V4h-3z" /></svg>
+                      <svg viewBox="0 0 24 24"><rect x="2" y="7" width="18" height="10" rx="2" /><path d="M22 10v4" /></svg>
+                    </span>
+                  </div>
+
+                  <!-- Falcon Perch app -->
+                  <div class="app app-perch">
+                    <svg class="map" viewBox="0 0 300 620" preserveAspectRatio="xMidYMid slice"><use href="#map" /></svg>
+                    <div class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg> Search a place</div>
+                    <div class="pin" id="demo-pin"><span class="eye"></span></div>
+                    <div class="sheet">
+                      <div class="panel panel-draft">
+                        <p class="muted">Dropped pin, not your perch yet</p>
+                        <p class="coords sm">48.8584° N<br />2.2945° E</p>
+                        <div class="row">
+                          <span class="pbtn pbtn-primary" id="demo-perch-btn">Perch here</span>
+                          <span class="pbtn">Cancel</span>
+                        </div>
+                      </div>
+                      <div class="panel panel-perch">
+                        <p class="muted">Your perch: Eiffel Tower</p>
+                        <p class="coords">48.8584° N<br />2.2945° E</p>
+                        <div class="sys">
+                          <div>
+                            <b class="sys-off">Only Falcon Perch uses this</b>
+                            <b class="sys-on"><svg viewBox="0 0 24 24"><path d="M12 3 5 6v6c0 4.5 3 7.7 7 9 4-1.3 7-4.5 7-9V6z" /></svg> All apps see this perch</b>
+                            <small class="sys-off">Turn on to hide your real location</small>
+                            <small class="sys-on">Real location hidden from every app</small>
+                          </div>
+                          <span class="switch" id="demo-switch"><span></span></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Any other maps app -->
+                  <div class="app app-maps">
+                    <svg class="map map-alt" viewBox="0 0 300 620" preserveAspectRatio="xMidYMid slice"><use href="#map" /></svg>
+                    <div class="maps-bar"><svg viewBox="0 0 24 24"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2z" /><path d="M9 4v14m6-12v14" /></svg> Any maps app</div>
+                    <div class="you"><span></span></div>
+                    <div class="maps-card">
+                      <small>You appear at</small>
+                      <b>Eiffel Tower, Paris</b>
+                      <span class="chip chip-ok"><svg viewBox="0 0 24 24"><path d="M12 3 5 6v6c0 4.5 3 7.7 7 9 4-1.3 7-4.5 7-9V6z" /></svg> Real location hidden</span>
+                    </div>
+                  </div>
+
+                  <div class="notif">
+                    <img src="favicon.svg" alt="" width="28" height="28" />
+                    <div><b>Apps see Eiffel Tower</b><small>48.85840, 2.29450 · your real location is hidden</small></div>
+                    <span class="notif-stop">Stop</span>
+                  </div>
+
+                  <div class="finger" id="demo-finger"><span></span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="wt-steps">
+              <p class="wt-caption" id="demo-caption" aria-live="polite"><b>Pick a place</b><span>Tap the map, search, or type coordinates.</span></p>
+              <ol class="steps" id="demo-steps">
+                <li>
+                  <button type="button" data-step="0" aria-current="step">
+                    <span class="n">1</span>
+                    <span class="t"><b>Pick a place</b><small>Tap the map, search, or type coordinates.</small></span>
+                    <span class="bar"><i></i></span>
+                  </button>
+                </li>
+                <li>
+                  <button type="button" data-step="1">
+                    <span class="n">2</span>
+                    <span class="t"><b>Set your perch</b><small>Confirm it. Save favourites for one-tap switching.</small></span>
+                    <span class="bar"><i></i></span>
+                  </button>
+                </li>
+                <li>
+                  <button type="button" data-step="2">
+                    <span class="n">3</span>
+                    <span class="t"><b>Apply to every app</b><small>One switch. A quiet notification confirms it, with Stop.</small></span>
+                    <span class="bar"><i></i></span>
+                  </button>
+                </li>
+                <li>
+                  <button type="button" data-step="3">
+                    <span class="n">4</span>
+                    <span class="t"><b>Every app follows</b><small>Maps, weather, social, everything sees the perch.</small></span>
+                    <span class="bar"><i></i></span>
+                  </button>
+                </li>
+              </ol>
+              <button type="button" class="btn btn-ghost btn-sm wt-toggle" id="demo-toggle" aria-pressed="false">
+                <svg class="i-pause" aria-hidden="true" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14" /></svg>
+                <svg class="i-play" aria-hidden="true" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+                <span>Pause</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ HOW IT WORKS ============ -->
+      <section class="section section-alt" id="how" aria-labelledby="how-title">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="kicker">How it works</p>
+            <h2 id="how-title">It changes the source, not just one app</h2>
+            <p class="sub">
+              Apps don’t read GPS directly. They ask Android or Google Play services. Falcon Perch answers both, once a second,
+              with your perch.
+            </p>
+          </div>
+
+          <div class="flow">
+            <div class="flow-node">
+              <span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="3" /><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z" /></svg></span>
+              <b>You choose a place</b>
+              <small>Map, search or coordinates</small>
+            </div>
+            <div class="flow-link" aria-hidden="true"><i></i></div>
+            <div class="flow-node flow-core">
+              <span class="ic"><img src="favicon.svg" alt="" width="28" height="28" /></span>
+              <b>Falcon Perch</b>
+              <small>Publishes a fix every second</small>
+            </div>
+            <div class="flow-link" aria-hidden="true"><i></i></div>
+            <div class="flow-stack">
+              <div class="flow-pill">Android GPS provider</div>
+              <div class="flow-pill">Android network &amp; fused</div>
+              <div class="flow-pill">Google Play services location</div>
+            </div>
+            <div class="flow-link" aria-hidden="true"><i></i></div>
+            <div class="flow-node">
+              <span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2" /><rect x="14" y="3" width="7" height="7" rx="2" /><rect x="3" y="14" width="7" height="7" rx="2" /><rect x="14" y="14" width="7" height="7" rx="2" /></svg></span>
+              <b>Every app</b>
+              <small>Sees your perch</small>
+            </div>
+          </div>
+
+          <div class="features">
+            <article class="feature">
+              <span class="ic"><svg viewBox="0 0 24 24"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2z" /><path d="M9 4v14m6-12v14" /></svg></span>
+              <h3>Google Maps included</h3>
+              <p>Puts Google Play services location into mock mode too, so Wi‑Fi and cell towers can’t give you away.</p>
+            </article>
+            <article class="feature">
+              <span class="ic"><svg viewBox="0 0 24 24"><path d="M5 17h2l2-6 4 10 2-6h4" /></svg></span>
+              <h3>Travel, don’t teleport</h3>
+              <p>Jump instantly, or walk, cycle or drive to a new perch along a real great-circle route.</p>
+            </article>
+            <article class="feature">
+              <span class="ic"><svg viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" /><path d="M10 21h4" /></svg></span>
+              <h3>Always in control</h3>
+              <p>A quiet notification shows while it’s on, with a Stop button. If Android revokes access, the app tells you.</p>
+            </article>
+            <article class="feature">
+              <span class="ic"><svg viewBox="0 0 24 24"><path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16l7-4z" /></svg></span>
+              <h3>Saved places</h3>
+              <p>Keep the perches you use, rename them, switch in one tap, and export a backup as JSON.</p>
+            </article>
+            <article class="feature">
+              <span class="ic"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10" /></svg></span>
+              <h3>Privacy log</h3>
+              <p>See every location request and what answered it. Real coordinates are never written down.</p>
+            </article>
+            <article class="feature">
+              <span class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" /></svg></span>
+              <h3>Nothing leaves your phone</h3>
+              <p>No account, no analytics, no ads, no servers. Maps come from OpenStreetMap; searches send only what you type.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SETUP ============ -->
+      <section class="section" id="setup" aria-labelledby="setup-title">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="kicker">Setup</p>
+            <h2 id="setup-title">Ready in about two minutes</h2>
+            <p class="sub">Android lets one app replace your location, and you choose which one. The app checks each step for you.</p>
+          </div>
+
+          <ol class="setup">
+            <li class="setup-step">
+              <span class="setup-n">1</span>
+              <h3>Install the app</h3>
+              <p>Download <code>falcon-perch.apk</code> on your phone and open it. Android asks once to allow installs from your browser.</p>
+              <a class="btn btn-primary btn-sm" href="https://github.com/Falcon-Perch/Falcon-Perch.github.io/releases/download/android-latest/falcon-perch.apk" data-download>Download APK</a>
+            </li>
+            <li class="setup-step">
+              <span class="setup-n">2</span>
+              <h3>Unlock Developer options</h3>
+              <p>Settings → About phone → tap <b>Build number</b> seven times.</p>
+              <div class="taps" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            </li>
+            <li class="setup-step">
+              <span class="setup-n">3</span>
+              <h3>Choose Falcon Perch</h3>
+              <p>Developer options → <b>Select mock location app</b> → Falcon Perch.</p>
+              <div class="mini-select" aria-hidden="true"><span>Select mock location app</span><b>Falcon Perch</b></div>
+            </li>
+            <li class="setup-step">
+              <span class="setup-n">4</span>
+              <h3>Flip the switch</h3>
+              <p>Allow location access when asked, pick your perch and turn on <b>Apply my perch to all apps</b>.</p>
+              <div class="mini-switch" aria-hidden="true"><span>All apps</span><span class="switch on"><span></span></span></div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- ============ HONEST LIMITS ============ -->
+      <section class="section section-alt" id="limits" aria-labelledby="limits-title">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="kicker">Honest limits</p>
+            <h2 id="limits-title">What it hides, and what it can’t</h2>
+            <p class="sub">Privacy tools should tell you the whole truth. Here it is.</p>
+          </div>
+          <div class="compare">
+            <div class="compare-col compare-yes">
+              <h3><svg viewBox="0 0 24 24"><path d="m5 12 5 5 9-10" /></svg> Hidden by Falcon Perch</h3>
+              <ul>
+                <li>GPS location seen by apps</li>
+                <li>Wi‑Fi and cell-tower location from Google Play services</li>
+                <li>Location in maps, weather, social and shopping apps</li>
+                <li>Location attached to new photos and check-ins</li>
+              </ul>
+            </div>
+            <div class="compare-col compare-no">
+              <h3><svg viewBox="0 0 24 24"><path d="M12 8v5m0 3.5v.5" /><circle cx="12" cy="12" r="9" /></svg> Still visible, so take care</h3>
+              <ul>
+                <li><b>Your IP address.</b> Use a trusted VPN with a server near your perch.</li>
+                <li><b>Your mobile carrier.</b> It always knows which towers you use.</li>
+                <li><b>Your Google account.</b> Pause Timeline and turn off Wi‑Fi and Bluetooth scanning.</li>
+                <li><b>Detection.</b> Android marks replaced locations; some banking apps and games may refuse to run.</li>
+              </ul>
+            </div>
+          </div>
+          <p class="note">
+            <svg viewBox="0 0 24 24"><path d="M12 3 2 20h20z" /><path d="M12 10v4m0 3v.5" /></svg>
+            <span><b>Emergencies:</b> tap <b>Stop</b> in the notification before calling emergency services, so responders can find you.</span>
+          </p>
+        </div>
+      </section>
+
+      <!-- ============ FAQ ============ -->
+      <section class="section" id="faq" aria-labelledby="faq-title">
+        <div class="wrap wrap-narrow">
+          <div class="section-head">
+            <p class="kicker">FAQ</p>
+            <h2 id="faq-title">Questions, answered</h2>
+          </div>
+          <div class="faq">
+            <details>
+              <summary>Do I need to root my phone?</summary>
+              <p>No. Falcon Perch uses Android’s built-in “mock location app” setting, which any phone can turn on from Developer options.</p>
+            </details>
+            <details>
+              <summary>Does it work with Google Maps?</summary>
+              <p>Yes. Google Maps reads location from Google Play services, and Falcon Perch puts Play services into mock mode with your perch. Allow location access when the app asks so it can do this.</p>
+            </details>
+            <details>
+              <summary>Does it work on iPhone?</summary>
+              <p>No. Apple doesn’t let apps change the location other apps see. You can still use the <a href="app/">web version</a> to choose the location used inside Falcon Perch itself.</p>
+            </details>
+            <details>
+              <summary>Why isn’t it on the Play Store?</summary>
+              <p>It’s distributed straight from GitHub, where it’s built in the open from public source code. You can check what you install against the code that built it.</p>
+            </details>
+            <details>
+              <summary>Will it drain my battery?</summary>
+              <p>Hardly. It publishes a fix once a second without turning on GPS hardware. Turn it off when you don’t need it.</p>
+            </details>
+            <details>
+              <summary>How do I stop it?</summary>
+              <p>Tap <b>Stop</b> in the notification, or turn off the switch in the app. Apps see your real location again straight away.</p>
+            </details>
+            <details>
+              <summary>Is this legal?</summary>
+              <p>Changing the location your own phone reports is legal in most places, and it’s a standard Android developer feature. Using it to deceive or defraud someone isn’t. Use it to protect your privacy, and follow the laws where you live.</p>
+            </details>
+            <details>
+              <summary>What data does Falcon Perch collect?</summary>
+              <p>None. There’s no account, no analytics and no server. Your perch and saved places live only on your phone, and “Forget everything” wipes them.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ FINAL CTA ============ -->
+      <section class="final">
+        <div class="wrap final-inner">
+          <img src="favicon.svg" alt="" width="64" height="64" />
+          <h2>Your location is yours.</h2>
+          <p>Download Falcon Perch and decide what every app sees.</p>
+          <div class="cta-row cta-center">
+            <a class="btn btn-primary btn-lg" href="https://github.com/Falcon-Perch/Falcon-Perch.github.io/releases/download/android-latest/falcon-perch.apk" data-download>
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14" /></svg>
+              Download for Android
+            </a>
+            <a class="btn btn-ghost-light btn-lg" href="app/">Open the web app</a>
+          </div>
+          <p class="fine">Android 6.0+ · Free &amp; open source (MIT) · <a href="https://github.com/Falcon-Perch/Falcon-Perch.github.io/releases/tag/android-latest">All release files</a></p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap footer-inner">
+        <a class="brand" href="#top"><img src="favicon.svg" alt="" width="24" height="24" /><span>Falcon Perch</span></a>
+        <nav aria-label="Footer">
+          <a href="app/">Web app</a>
+          <a href="https://github.com/Falcon-Perch/Falcon-Perch.github.io">Source code</a>
+          <a href="https://github.com/Falcon-Perch/Falcon-Perch.github.io/releases/tag/android-latest">Releases</a>
+        </nav>
+        <p>MIT licensed. Map data © OpenStreetMap contributors.</p>
+      </div>
+    </footer>
+
+    <!-- Shared stylised map used by the phone mockups -->
+    <svg width="0" height="0" class="defs" aria-hidden="true" focusable="false">
+      <defs>
+        <symbol id="map" viewBox="0 0 300 620">
+          <rect width="300" height="620" class="m-land" />
+          <path class="m-park" d="M-10 360 q60 -30 120 -10 t90 40 l20 80 q-80 40 -160 20 t-80 -40z" />
+          <rect class="m-park" x="196" y="70" width="80" height="60" rx="14" />
+          <path class="m-water" d="M-20 250 C 60 220, 110 300, 180 270 S 290 200, 330 230 L330 262 C 290 236, 250 300, 182 302 S 60 252, -20 284Z" />
+          <g class="m-road">
+            <path d="M-10 120 L310 160" /><path d="M-10 460 L310 420" /><path d="M-10 560 L310 600" />
+            <path d="M70 -10 L40 630" /><path d="M160 -10 L170 630" /><path d="M250 -10 L280 630" />
+          </g>
+          <g class="m-street">
+            <path d="M-10 60 L310 80" /><path d="M-10 200 L310 215" /><path d="M-10 330 L310 350" /><path d="M-10 510 L310 500" />
+            <path d="M115 -10 L105 630" /><path d="M210 -10 L225 630" /><path d="M20 140 L150 420" /><path d="M300 300 L190 520" />
+          </g>
+          <g class="m-block">
+            <rect x="82" y="20" width="24" height="30" rx="3" /><rect x="124" y="94" width="28" height="22" rx="3" />
+            <rect x="12" y="160" width="40" height="26" rx="3" /><rect x="226" y="170" width="30" height="24" rx="3" />
+            <rect x="182" y="372" width="34" height="26" rx="3" /><rect x="60" y="474" width="34" height="22" rx="3" />
+            <rect x="200" y="520" width="40" height="30" rx="3" /><rect x="120" y="540" width="30" height="40" rx="3" />
+          </g>
+        </symbol>
+      </defs>
+    </svg>
+
+    <script src="main.js" defer></script>
+  </body>
+</html>

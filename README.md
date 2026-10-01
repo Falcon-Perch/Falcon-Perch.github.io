@@ -42,7 +42,7 @@ React 18 + TypeScript, Vite 6, Capacitor 7 (Android shell plus a native Java plu
 
 ```bash
 npm install
-npm run dev        # http://localhost:5173/falcon-perch/
+npm run dev        # http://localhost:5173/app/
 npm test
 npm run build && npm run preview
 ```
@@ -62,18 +62,24 @@ Geolocation needs a secure context. `localhost` counts, but to test on a phone o
 
 ## Deploy to GitHub Pages
 
-1. Create a repository named **`falcon-perch`** and push this project to `main`.
-2. In the repo, go to **Settings → Pages → Build and deployment → Source** and choose **GitHub Actions**.
-3. Every push to `main` runs `.github/workflows/deploy.yml`: install, test, build, deploy.
-4. The site is served at `https://<your-username>.github.io/falcon-perch/`.
+The site at `https://falcon-perch.github.io/` has two parts:
 
-**Different repo name or custom domain?** Change `BASE` at the top of `vite.config.ts` (`'/<repo-name>/'`, or `'/'` for a custom domain plus a `public/CNAME` file).
+- `/`: the landing page in `site/` (plain HTML, CSS and JS, no build step), with the download link and an animated walkthrough.
+- `/app/`: the web app, built by Vite.
+
+1. Push this project to `main` of the `Falcon-Perch.github.io` repository.
+2. In the repo, go to **Settings → Pages → Build and deployment → Source** and choose **GitHub Actions**.
+3. Every push to `main` runs `.github/workflows/deploy.yml`: install, test, build, copy `site/` to the root and the app to `/app/`, deploy.
+
+**Hosting the app somewhere else?** Change `PAGES_BASE` at the top of `vite.config.ts`.
+
+To preview the full site locally: `npm run build && rm -rf _site && mkdir _site && cp -r site/. _site/ && cp -r dist _site/app && npx serve _site`.
 
 ## GitHub Pages specifics
 
 | Constraint | How it's handled |
 |---|---|
-| Sub-path hosting | `BASE` drives Vite `base`, manifest `scope`/`start_url` and the service worker |
+| Sub-path hosting | `PAGES_BASE` (`/app/`) drives Vite `base`, manifest `scope`/`start_url` and the service worker |
 | No server rewrites | `HashRouter` (`/#/places`) so refreshes never 404 |
 | No custom HTTP headers | CSP injected as a `<meta>` tag at build time (`cspMeta` plugin) |
 | No backend | All data in IndexedDB/localStorage; backup via JSON export |
@@ -81,6 +87,7 @@ Geolocation needs a secure context. `localhost` counts, but to test on a phone o
 ## Project structure
 
 ```
+site/              Landing page served at the site root (index.html, styles.css, main.js)
 android/           Capacitor Android project
   app/src/main/java/io/github/falconperch/
     MockLocationService.java   foreground service that publishes the perch to the system

@@ -7,7 +7,7 @@ android {
         applicationId "io.github.falconperch"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode (System.getenv("VERSION_CODE") ?: "1").toInteger()
+        versionCode = (System.getenv("VERSION_CODE") ?: "1").toInteger()
         versionName "0.2.0"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.

@@ -1,6 +1,6 @@
 # Falcon Perch
 
-A privacy-first, mobile-first PWA that lets you choose the location the app uses (your **perch**) instead of your real GPS position. Built to be hosted free on GitHub Pages.
+A privacy-first, mobile-first app that lets you choose the location you appear at (your **perch**) instead of your real GPS position. It ships as a PWA hosted free on GitHub Pages and as an **Android app that replaces your location for every app on the phone**, Google Maps included.
 
 ## What it does
 
@@ -12,12 +12,31 @@ A privacy-first, mobile-first PWA that lets you choose the location the app uses
 - **Your data**: export/import places as JSON, and "Forget everything" wipes IndexedDB, settings and cached tiles.
 - **Installable and offline-capable**: app shell precached, and map tiles you've viewed are cached (capped, per OSM policy).
 
-### What it can't do
-A web app can't change your device's system GPS. Falcon Perch controls the location used *inside this app only*; other apps and sites are unaffected. This is shown in Settings.
+### System-wide location (Android app)
+
+The Android app adds **Apply my perch to all apps**. While it's on, every app on the phone sees your perch instead of your real location:
+
+- **Android's own providers** (`gps`, `network`, and `fused` on Android 12+) are replaced with test providers, so apps using `LocationManager` get the perch.
+- **Google Play services' fused location**, which Google Maps and most modern apps use, is put into mock mode. Without this, Play services would keep locating you from Wi‑Fi and cell towers.
+- A fix is published every second by a foreground service, so apps never fall back to the real GPS. A quiet notification shows while it's on, with a **Stop** button.
+- **Travel modes** (jump, walk, cycle, drive) move you smoothly to a new perch instead of jumping.
+- If Android withdraws permission, or you tap Stop, the app switches itself off and tells you, so it never fails silently.
+
+One-time setup on the phone (the app's Settings walks you through it and checks each step):
+
+1. Install `falcon-perch.apk` from the [android-latest release](https://github.com/Falcon-Perch/Falcon-Perch.github.io/releases/tag/android-latest).
+2. **Settings → About phone → tap Build number 7 times** to unlock Developer options.
+3. **Developer options → Select mock location app → Falcon Perch.**
+4. Allow location access when asked. It's needed to override Google Play services. Falcon Perch never stores or sends your real location.
+
+**What it can't hide.** Your IP address (use a VPN), your mobile carrier's view of which towers you use, and data already in your Google account (pause Timeline). Android marks replaced locations, so some apps can detect it and may refuse to work. Turn it off before calling emergency services.
+
+### What the web version can't do
+A website can't change your device's system GPS. In the browser, Falcon Perch controls the location used *inside this app only*; other apps and sites are unaffected. Settings links to the Android app. **iPhone:** Apple doesn't let apps change the location other apps see, so system-wide location isn't possible on iOS.
 
 ## Tech stack
 
-React 18 + TypeScript, Vite 6, Tailwind CSS 4, Zustand, Dexie (IndexedDB), Leaflet + react-leaflet with OpenStreetMap tiles, Nominatim search, vite-plugin-pwa (Workbox), Vitest. Fonts are self-hosted via Fontsource, so no requests go to Google.
+React 18 + TypeScript, Vite 6, Capacitor 7 (Android shell plus a native Java plugin), Tailwind CSS 4, Zustand, Dexie (IndexedDB), Leaflet + react-leaflet with OpenStreetMap tiles, Nominatim search, vite-plugin-pwa (Workbox), Vitest. Fonts are self-hosted via Fontsource, so no requests go to Google.
 
 ## Run locally
 
@@ -27,6 +46,17 @@ npm run dev        # http://localhost:5173/falcon-perch/
 npm test
 npm run build && npm run preview
 ```
+
+### Android app
+
+Needs Node 20+, JDK 21 and the Android SDK (Android Studio installs it).
+
+```bash
+npm run build:android                 # web build for the app + cap sync
+cd android && ./gradlew assembleDebug  # → android/app/build/outputs/apk/debug/app-debug.apk
+```
+
+Or open the `android/` folder in Android Studio and press Run. CI builds the APK on every push (`.github/workflows/android.yml`) and, on `main`, publishes it to the `android-latest` release. Add the `ANDROID_KEYSTORE_BASE64`, `ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_ALIAS` and `ANDROID_KEY_PASSWORD` repository secrets to sign release builds with your own key, so each new build installs as an update.
 
 Geolocation needs a secure context. `localhost` counts, but to test on a phone over your LAN you need HTTPS (or just test on the deployed Pages URL).
 
@@ -51,12 +81,16 @@ Geolocation needs a secure context. `localhost` counts, but to test on a phone o
 ## Project structure
 
 ```
+android/           Capacitor Android project
+  app/src/main/java/io/github/falconperch/
+    MockLocationService.java   foreground service that publishes the perch to the system
+    SystemLocationPlugin.java  JS bridge: status, start/stop, setup shortcuts, permissions
 src/
-  location/        locationManager (single entry point), real + perch providers
+  location/        locationManager (single entry point), real + perch providers, systemLocation bridge
   db/              Dexie schema: places, log
   store/           Zustand: settings (persisted), ask dialog, toasts
   lib/             coordinate helpers, Nominatim search, export/import/forget
-  components/      MapView, SearchBar, PerchCard, AskDialog, TabBar, UpdatePrompt
+  components/      MapView, SearchBar, PerchCard, AskDialog, TabBar, UpdatePrompt, SystemWide, SystemSync
   pages/           Map, Places, Log, Settings
 tests/             Vitest unit tests (geo helpers, locationManager rules)
 ```

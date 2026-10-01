@@ -3,6 +3,7 @@ import TabBar from './components/TabBar';
 import AskDialog from './components/AskDialog';
 import Toaster from './components/Toaster';
 import UpdatePrompt from './components/UpdatePrompt';
+import SystemSync from './components/SystemSync';
 import MapPage from './pages/MapPage';
 import PlacesPage from './pages/PlacesPage';
 import LogPage from './pages/LogPage';
@@ -24,6 +25,7 @@ export default function App() {
       <AskDialog />
       <Toaster />
       <UpdatePrompt />
+      <SystemSync />
     </div>
   );
 }

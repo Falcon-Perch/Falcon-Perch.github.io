@@ -20,7 +20,7 @@ const { getLocation, requestRealLocation } = await import('../src/location/locat
 beforeEach(async () => {
   await db.log.clear();
   geo.getCurrentPosition.mockReset();
-  useSettings.setState({ mode: 'perch', perch: { lat: 7.2, lng: 79.84, label: 'Beach' } });
+  useSettings.setState({ mode: 'perch', perch: { lat: 7.2, lng: 79.84, label: 'Beach' }, systemWide: false });
 });
 
 const answerNext = (choice: 'perch' | 'real' | 'cancel') =>
@@ -58,5 +58,13 @@ describe('locationManager', () => {
     expect(await requestRealLocation('test')).toBeNull();
     expect(geo.getCurrentPosition).not.toHaveBeenCalled();
     expect((await db.log.toArray())[0].source).toBe('cancelled');
+  });
+
+  it('refuses to read GPS while system-wide location is on, since the phone reports the perch', async () => {
+    useSettings.setState({ systemWide: true });
+    answerNext('real');
+    await expect(requestRealLocation('test')).rejects.toThrow(/System-wide location is on/);
+    expect(geo.getCurrentPosition).not.toHaveBeenCalled();
+    expect((await db.log.toArray())[0].source).toBe('unavailable');
   });
 });

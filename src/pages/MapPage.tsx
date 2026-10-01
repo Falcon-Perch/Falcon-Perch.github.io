@@ -3,6 +3,7 @@ import { useLiveQuery } from 'dexie-react-hooks';
 import { Crosshair, LocateFixed } from 'lucide-react';
 import MapView, { type FlyTarget } from '../components/MapView';
 import SearchBar from '../components/SearchBar';
+import { SystemWideBar } from '../components/SystemWide';
 import { DraftCard, PerchCard } from '../components/PerchCard';
 import { Button } from '../components/ui';
 import { db } from '../db/db';
@@ -141,6 +142,7 @@ export default function MapPage() {
               </Button>
             </section>
           )}
+          {!draft && <SystemWideBar />}
           {real && !draft && (
             <p className="mt-3 flex items-center justify-between gap-2 border-t border-line pt-3 text-sm text-muted">
               <span>Real location shown for this session only.</span>

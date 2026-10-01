@@ -42,6 +42,11 @@ export async function requestRealLocation(purpose: string): Promise<Fix | null> 
 }
 
 async function readRealLocation(purpose: string): Promise<Fix | null> {
+  if (useSettings.getState().systemWide) {
+    // The phone itself reports the perch while system-wide location is on.
+    await logRequest(purpose, 'unavailable');
+    throw new LocationError('unavailable', 'System-wide location is on, so your phone reports your perch. Turn it off to read your real GPS.');
+  }
   try {
     const fix = await realProvider.getCurrent();
     await logRequest(purpose, 'real', fix.accuracy);
